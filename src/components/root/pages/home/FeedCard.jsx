@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { FaRegHeart } from "react-icons/fa";
 import { IoIosHeart } from "react-icons/io";
+import Like from "../../../shared/Like";
 
 const FeedCard = () => {
   const [liked, setLiked] = useState(false);
@@ -36,18 +36,7 @@ const FeedCard = () => {
         )}
       </div>
       <div className="mx-2 flex justify-between mt-4">
-        {liked ? (
-          <IoIosHeart
-            style={{ color: "red" }}
-            className="size-6 cursor-pointer"
-            onClick={() => setLiked(!liked)}
-          />
-        ) : (
-          <FaRegHeart
-            className="size-6 cursor-pointer"
-            onClick={() => setLiked(!liked)}
-          />
-        )}
+        <Like showLikes={true}/>
         <img
           src="./assets/icons/saved.svg"
           alt=""

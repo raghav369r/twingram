@@ -1,6 +1,7 @@
 import { IoSearchOutline } from "react-icons/io5";
 import { IoIosHeart } from "react-icons/io";
 import { IoFilterSharp } from "react-icons/io5";
+import Like from "../../../shared/Like";
 
 
 const Explore = () => {
@@ -36,7 +37,7 @@ const Explore = () => {
                   <p>karna</p>
                 </div>
                 <div>
-                  <IoIosHeart className="" />
+                  <Like showLikes={false}/>
                 </div>
               </div>
             </div>
