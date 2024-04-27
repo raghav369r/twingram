@@ -4,6 +4,15 @@ import { IoIosHeart } from "react-icons/io";
 
 const FeedCard = () => {
   const [liked, setLiked] = useState(false);
+  const [doubleTap, setDoubleTap] = useState(false);
+  const handleDoubleTap = () => {
+    setLiked(true);
+    setDoubleTap(true);
+    setTimeout(() => {
+      setDoubleTap(false);
+    }, 2000);
+  };
+
   return (
     <div className="rounded-xl p-8 m-8 border border-gray-700">
       <div className="flex gap-4 w-full items-center">
@@ -15,7 +24,17 @@ const FeedCard = () => {
       </div>
       <h1 className="my-4">Caption</h1>
       <p className="my-2 text-gray-500">#hashtags#friends#love</p>
-      <div className="w-full h-96 rounded-xl bg-gray-800"></div>
+      <div
+        className="w-full h-96 rounded-xl bg-gray-800 flex justify-center items-center "
+        onDoubleClick={handleDoubleTap}
+      >
+        {doubleTap && (
+          <IoIosHeart
+            style={{ color: "red"}}
+            className="size-40 animate-ping duration-1000"
+          />
+        )}
+      </div>
       <div className="mx-2 flex justify-between mt-4">
         {liked ? (
           <IoIosHeart
