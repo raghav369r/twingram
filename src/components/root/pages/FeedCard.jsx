@@ -19,7 +19,7 @@ const FeedCard = () => {
         <div className="size-16 rounded-full bg-pink-500"></div>
         <div>
           <h1 className="font-semibold">Kingk</h1>
-          <h2 className="text-gray-500">12 hours ego . kakinada</h2>
+          <h2 className="text-gray-500">12 hours ago . kakinada</h2>
         </div>
       </div>
       <h1 className="my-4">Caption</h1>
