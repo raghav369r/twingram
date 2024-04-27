@@ -6,6 +6,7 @@ import RootLayout from "./components/root/RootLayout";
 import Home from "./components/root/pages/home/Home";
 import SiginUp from "./components/auth/SignUp";
 import Explore from "./components/root/pages/explore/Explore";
+import AllPeople from "./components/people/AllPeople";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route element={<RootLayout />}>
           <Route index element={<Home />} />
           <Route path="/explore" element={<Explore />} />
+          <Route path="/people" element={<AllPeople />} />
 
         </Route>
       </Routes>

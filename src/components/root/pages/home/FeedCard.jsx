@@ -25,7 +25,7 @@ const FeedCard = () => {
       <h1 className="my-4">Caption</h1>
       <p className="my-2 text-gray-500">#hashtags#friends#love</p>
       <div
-        className="w-full h-96 rounded-xl bg-gray-800 flex justify-center items-center "
+        className="w-full h-96 rounded-xl bg-neutral-800 flex justify-center items-center "
         onDoubleClick={handleDoubleTap}
       >
         {doubleTap && (

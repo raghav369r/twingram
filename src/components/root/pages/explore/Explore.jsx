@@ -1,5 +1,4 @@
 import { IoSearchOutline } from "react-icons/io5";
-import { IoIosHeart } from "react-icons/io";
 import { IoFilterSharp } from "react-icons/io5";
 import Like from "../../../shared/Like";
 
@@ -8,7 +7,7 @@ const Explore = () => {
   const data = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   return (
     <div className="p-10 h-screen overflow-y-scroll">
-      <h1 className="font-semibold text-3xl ">Search Posts</h1>
+      <h1 className="font-semibold text-3xl ">Search People</h1>
       <div className="flex w-full items-center my-4">
         <label className="bg-neutral-800 p-4 rounded-l-lg">
           <IoSearchOutline className="size-6" style={{color:"#808080"}}/>
