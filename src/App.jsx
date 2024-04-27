@@ -3,9 +3,9 @@ import { Route, Routes } from "react-router-dom";
 import Siginin from "./components/auth/Siginin";
 import AuthLayout from "./components/auth/AuthLayout";
 import RootLayout from "./components/root/RootLayout";
-import Home from "./components/root/pages/Home";
+import Home from "./components/root/pages/home/Home";
 import SiginUp from "./components/auth/SignUp";
-import FeedCard from "./components/root/pages/FeedCard";
+import Explore from "./components/root/pages/explore/Explore";
 
 const App = () => {
   return (
@@ -18,7 +18,8 @@ const App = () => {
         </Route>
         <Route element={<RootLayout />}>
           <Route index element={<Home />} />
-          <Route path="/" element={<FeedCard />} />
+          <Route path="/explore" element={<Explore />} />
+
         </Route>
       </Routes>
     </main>
