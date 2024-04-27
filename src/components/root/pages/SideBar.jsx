@@ -1,15 +1,19 @@
+import { useSelector, useDispatch } from "react-redux";
+import { NavLink, useLocation } from "react-router-dom";
 import { IoHomeOutline } from "react-icons/io5";
 import { MdExplore } from "react-icons/md";
 import { IoPeopleOutline } from "react-icons/io5";
 import { IoLogOutOutline } from "react-icons/io5";
 import { MdCreateNewFolder } from "react-icons/md";
-import { useSelector } from "react-redux";
-import { NavLink, useLocation } from "react-router-dom";
-
+import {removeUser} from "../../../config/store/userReducer";
 
 const SideBar = () => {
     const user=useSelector(store=>store.user);
     const {pathname}=useLocation();
+    const dispatch=useDispatch();
+    const handleLogout=()=>{
+        dispatch(removeUser());
+    }
     return (
     <div className="w-full">
         <ul className="flex flex-col gap-4">
@@ -20,7 +24,7 @@ const SideBar = () => {
             <li> <NavLink to={"/people"} className={`flex gap-4 items-center rounded-lg cursor-pointer hover:bg-blue-500 px-2 py-4 ${pathname=="/people"?" bg-blue-500":"" }`}><IoPeopleOutline className="size-7"/><h1 className="text-xl font-semibold">People</h1></NavLink></li>
             <li> <NavLink to={"/saved"} className={`flex gap-4 items-center rounded-lg cursor-pointer hover:bg-blue-500 px-2 py-4 ${pathname=="/saved"?" bg-blue-500":"" }`}><img src="/assets/icons/saved.svg" alt="" className="invert transition brightness-0 size-7"/><h1 className="text-xl font-semibold">Saved</h1></NavLink></li>
             <li> <NavLink to={"/create-post"} className={`flex gap-4 items-center rounded-lg cursor-pointer hover:bg-blue-500 px-2 py-4 ${pathname=="/create-post"?" bg-blue-500":"" }`}><MdCreateNewFolder className="size-7"/><h1 className="text-xl font-semibold">Create Post</h1></NavLink></li>
-            <li> <NavLink to={"/"} className={`flex gap-4 items-center rounded-lg cursor-pointer hover:bg-blue-500 px-2 py-4 ${pathname=="/home"?" bg-blue-500":"" }`}><IoLogOutOutline className="size-7"/><h1 className="text-xl font-semibold">LogOut</h1></NavLink></li>
+            <li className="flex gap-4 items-center rounded-lg cursor-pointer hover:bg-blue-500 px-2 py-4" onClick={handleLogout}><IoLogOutOutline className="size-7"/><h1 className="text-xl font-semibold">LogOut</h1></li>
         </ul>
     </div>
   ) 

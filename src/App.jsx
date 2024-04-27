@@ -6,7 +6,9 @@ import RootLayout from "./components/root/RootLayout";
 import Home from "./components/root/pages/home/Home";
 import SiginUp from "./components/auth/SignUp";
 import Explore from "./components/root/pages/explore/Explore";
-import AllPeople from "./components/people/AllPeople";
+import AllPeople from "./components/root/pages/people/AllPeople";
+import Saved from "./components/root/pages/saved/Saved";
+import CreatePost from "./components/root/pages/createPost/CreatePost";
 
 const App = () => {
   return (
@@ -21,7 +23,8 @@ const App = () => {
           <Route index element={<Home />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="/people" element={<AllPeople />} />
-
+          <Route path="/saved" element={<Saved />} />
+          <Route path="/create-post" element={<CreatePost />} />
         </Route>
       </Routes>
     </main>
