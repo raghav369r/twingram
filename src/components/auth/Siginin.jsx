@@ -11,7 +11,7 @@ const Siginin = () => {
     dispatch(setUser({name:"Raghav",email:"Raghav@reddy"}));
   }
   return (
-      <div className="w-1/2 flex justify-center items-center h-screen overflow-y-scroll">
+      <div className="flex justify-center items-center h-screen overflow-y-scroll">
         <form className="">
           <img src={logo} alt="" className="" />
           <h1 className="text-center text-3xl my-4 font-semibold">

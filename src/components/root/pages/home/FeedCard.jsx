@@ -10,7 +10,7 @@ const FeedCard = () => {
     setDoubleTap(true);
     setTimeout(() => {
       setDoubleTap(false);
-    }, 2000);
+    }, 500);
   };
 
   return (
@@ -25,7 +25,7 @@ const FeedCard = () => {
       <h1 className="my-4">Caption</h1>
       <p className="my-2 text-gray-500">#hashtags#friends#love</p>
       <div
-        className="w-full h-96 rounded-xl bg-neutral-800 flex justify-center items-center "
+        className="w-full h-48 md:h-96 rounded-xl bg-neutral-800 flex justify-center items-center "
         onDoubleClick={handleDoubleTap}
       >
         {doubleTap && (

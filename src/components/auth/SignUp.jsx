@@ -12,7 +12,7 @@ const SiginUp = () => {
 
   }
   return (
-      <div className="w-1/2 flex justify-center items-center">
+      <div className="flex w-full h-screen justify-center items-center">
         <form className="">
           <img src={logo} alt="" className="" />
           <h1 className="text-center text-3xl my-4 font-semibold">

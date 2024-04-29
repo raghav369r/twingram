@@ -13,8 +13,10 @@ const AuthLayout = () => {
   },[user,navigate]);
   return (
     <div className="flex h-screen">
-      <Outlet />
-      <div className="w-1/2">
+      <div className="w-full md:w-1/2 ">
+        <Outlet />
+      </div>
+      <div className="hidden w-1/2 md:block">
         <img src={side_img} alt="" className="object-cover w-full h-screen" />
       </div>
     </div>
