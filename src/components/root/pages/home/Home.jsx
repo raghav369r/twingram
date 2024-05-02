@@ -1,14 +1,27 @@
 import TopCreaters from "../TopCreaters";
 import FeedCard from "./FeedCard";
+import { useEffect, useState } from "react";
+import { getFeed } from "../../../../services/posts/post";
 
 const Home = () => {
-  const data = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const [data, setData] = useState(null);
+  const getData = async () => {
+    const res = await getFeed();
+    if (res.error)
+      return <h1 className="font-semibold text-2xl">Some thing went wrong</h1>;
+    else setData(res);
+  };
+  useEffect(() => {
+    getData();
+  }, []);
   return (
     <div className="flex">
-      <div className={"w-full md:w-3/4 h-screen overflow-y-scroll scrollbar-hide"}>
+      <div
+        className={"w-full md:w-3/4 h-screen overflow-y-scroll scrollbar-hide"}
+      >
         <h1 className="text-3xl m-4 font-semibold">Home Feed</h1>
         {data?.map((ele, ind) => (
-          <FeedCard key={ind} />
+          <FeedCard key={ind} post={ele}/>
         ))}
       </div>
       <div className="hidden w-1/4 md:block bg-neutral-900 h-screen overflow-y-scroll">

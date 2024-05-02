@@ -25,10 +25,7 @@ const SiginUp = () => {
       email: email,
       password: password,
     };
-    // setTimeout(() => {
-    //   setLoading(false);
-    //   dispatch(setUser({ name: "Raghav", email: "Raghav@reddy" }));
-    // }, 2000);
+    
     const res = await login(data);
     if (res?.error) setError(res.error);
     else dispatch(setUser(res));
