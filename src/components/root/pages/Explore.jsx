@@ -3,22 +3,17 @@ import { IoFilterSharp } from "react-icons/io5";
 import Like from "../../shared/Like";
 import { useEffect, useState } from "react";
 import { getFeed } from "../../../services/posts/post";
+import SmallPost from "./SmallPost";
+import useGetfeed from "../../../hooks/useGetfeed";
 
 const Explore = () => {
-  const [data, setData] = useState(null);
-  const getData = async () => {
-    const res = await getFeed();
-    if (res.error)
-      return <h1 className="font-semibold text-2xl">Some thing went wrong</h1>;
-    else setData(res);
-  };
-  useEffect(() => {
-    getData();
-  }, []);
+  const data=useGetfeed();
+  if (data?.error)
+    return <h1 className="font-semibold text-2xl">Some thing went wrong</h1>;
 
   return (
     <div className="p-10 h-screen overflow-y-scroll">
-      <h1 className="font-semibold text-3xl ">Search People</h1>
+      <h1 className="font-semibold text-3xl ">Search Posts</h1>
       <div className="flex w-full items-center my-4">
         <label className="bg-neutral-800 p-4 rounded-l-lg">
           <IoSearchOutline className="size-6" style={{ color: "#808080" }} />
@@ -39,22 +34,8 @@ const Explore = () => {
           </div>
         </div>
         <div className="grid grid-cols-3">
-          {data?.map((ele,ind) => (
-            <div
-              key={ind}
-              className="rounded-lg bg-neutral-800 relative group cursor-pointer"
-            >
-              <img src={ele?.imageUrl} alt="" className="w-full aspect-square object-cover"/>
-              <div className="hidden group-hover:flex justify-between bottom-0 items-center w-full p-2 absolute z-10">
-                <div className="flex items-center gap-2">
-                  <div className="size-8 rounded-full bg-pink-400" />
-                  <p>karna</p>
-                </div>
-                <div>
-                  <Like showLikes={false} />
-                </div>
-              </div>
-            </div>
+          {data?.map((ele, ind) => (
+            <SmallPost ele={ele} key={ind} />
           ))}
         </div>
       </div>

@@ -2,10 +2,11 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Outlet, useNavigate } from "react-router-dom";
 import SideBar from "./pages/SideBar";
+import useGetCuttentUser from "../../hooks/useGetCuttentUser";
 
 const RootLayout = () => {
   const navigate = useNavigate();
-  const user = useSelector((store) => store.user);
+  const user = useGetCuttentUser();
   useEffect(() => {
     if (!user) navigate("/login");
   }, [user, navigate]);

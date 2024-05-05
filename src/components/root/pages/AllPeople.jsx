@@ -3,6 +3,7 @@ import { IoSearchOutline } from "react-icons/io5";
 import { IoFilterSharp } from "react-icons/io5";
 import { getAllUsers } from "../../../services/user";
 import Avatar from "react-avatar";
+import useGetAlluUsers from "../../../hooks/useGetAlluUsers";
 
 const Profile = ({ profile }) => {
   const { name, email } = profile;
@@ -21,14 +22,7 @@ const Profile = ({ profile }) => {
 };
 
 const AllPeople = () => {
-  const [data, setData] = useState(null);
-  useEffect(() => {
-    const getData = async () => {
-      const res = await getAllUsers();
-      setData(res);
-    };
-    getData();
-  }, []);
+  const data = useGetAlluUsers();
   return (
     <div className="p-10 h-screen overflow-y-scroll">
       <h1 className="font-semibold text-3xl ">Search People</h1>

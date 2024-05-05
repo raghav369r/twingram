@@ -2,18 +2,13 @@ import TopCreaters from "../TopCreaters";
 import FeedCard from "./FeedCard";
 import { useEffect, useState } from "react";
 import { getFeed } from "../../../../services/posts/post";
+import useGetfeed from "../../../../hooks/useGetfeed";
 
 const Home = () => {
-  const [data, setData] = useState(null);
-  const getData = async () => {
-    const res = await getFeed();
-    if (res.error)
-      return <h1 className="font-semibold text-2xl">Some thing went wrong</h1>;
-    else setData(res);
-  };
-  useEffect(() => {
-    getData();
-  }, []);
+  const data = useGetfeed();
+  if (data?.error)
+    return <h1 className="font-semibold text-2xl">Some thing went wrong</h1>;
+
   return (
     <div className="flex">
       <div
@@ -21,7 +16,7 @@ const Home = () => {
       >
         <h1 className="text-3xl m-4 font-semibold">Home Feed</h1>
         {data?.map((ele, ind) => (
-          <FeedCard key={ind} post={ele}/>
+          <FeedCard key={ind} post={ele} />
         ))}
       </div>
       <div className="hidden w-1/4 md:block bg-neutral-900 h-screen overflow-y-scroll">

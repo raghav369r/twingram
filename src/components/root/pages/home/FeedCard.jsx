@@ -3,20 +3,18 @@ import { IoIosHeart } from "react-icons/io";
 import Like from "../../../shared/Like";
 import Avatar from "react-avatar";
 import { getUserProfile } from "../../../../services/user";
+import { useNavigate } from "react-router-dom";
+import useGetProfile from "../../../../hooks/useGetProfile";
 
-const FeedCard = ({post}) => {
-
-  const [user,setUser]=useState(null);
-  const [liked, setLiked] = useState(false);
+const FeedCard = ({ post }) => {
+  const navigate = useNavigate();
   const [doubleTap, setDoubleTap] = useState(false);
+  const [liked, setLiked] = useState(false);
+  const user = useGetProfile(post?.ownerId);
 
-  useEffect(()=>{
-    const getUser=async()=>{
-      const res=await getUserProfile(post.ownerId);
-      setUser(res);
-    }
-    getUser();
-  },[])
+  const handleNavigate = () => {
+    if (user._id) navigate("/user/" + user._id);
+  };
 
   const handleDoubleTap = () => {
     setLiked(true);
@@ -30,7 +28,13 @@ const FeedCard = ({post}) => {
     <div className="rounded-xl p-8 m-8 border border-gray-700">
       <div className="flex gap-4 w-full items-center">
         <div className="size-16">
-          <Avatar name={user?.name} size="100%" round={true} />
+          <Avatar
+            name={user?.name}
+            size="100%"
+            round={true}
+            className="cursor-pointer"
+            onClick={handleNavigate}
+          />
         </div>
         <div>
           <h1 className="font-semibold">{user?.name}</h1>
@@ -38,12 +42,18 @@ const FeedCard = ({post}) => {
         </div>
       </div>
       <h1 className="my-4">{post?.caption}</h1>
-      <div className="my-2 text-gray-500">{post?.tags?.map((ele)=>"#"+ele)}</div>
+      <div className="my-2 text-gray-500">
+        {post?.tags?.map((ele) => "#" + ele)}
+      </div>
       <div
         className="w-full rounded-xl bg-neutral-800 flex justify-center items-center relative"
         onDoubleClick={handleDoubleTap}
       >
-        <img src={post?.imageUrl} alt=""/>
+        <img
+          src={post?.imageUrl}
+          alt=""
+          className="max-h-96 max-w-full object-cover hover:object-contain select-none"
+        />
         {doubleTap && (
           <IoIosHeart
             style={{ color: "red" }}
@@ -52,7 +62,7 @@ const FeedCard = ({post}) => {
         )}
       </div>
       <div className="mx-2 flex justify-between mt-4">
-        <Like showLikes={true} />
+        <Like showLikes={true} postele={post} />
         <img
           src="./assets/icons/saved.svg"
           alt=""

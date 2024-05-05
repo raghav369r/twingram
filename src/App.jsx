@@ -9,11 +9,11 @@ import Explore from "./components/root/pages/Explore";
 import AllPeople from "./components/root/pages/AllPeople";
 import Saved from "./components/root/pages/Saved";
 import CreatePost from "./components/root/pages/CreatePost";
+import User from "./components/root/pages/User";
 
 const App = () => {
   return (
     <main className="font-customFont text-white">
-
       <Routes>
         <Route element={<AuthLayout />}>
           <Route path="/sign-in" element={<Siginin />} />
@@ -25,6 +25,7 @@ const App = () => {
           <Route path="/people" element={<AllPeople />} />
           <Route path="/saved" element={<Saved />} />
           <Route path="/create-post" element={<CreatePost />} />
+          <Route path="/user/:userId" element={<User/>} />
         </Route>
       </Routes>
     </main>
