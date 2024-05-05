@@ -4,14 +4,15 @@ import { IoFilterSharp } from "react-icons/io5";
 import { getAllUsers } from "../../../services/user";
 import Avatar from "react-avatar";
 import useGetAlluUsers from "../../../hooks/useGetAlluUsers";
+import { NavLink } from "react-router-dom";
 
 const Profile = ({ profile }) => {
-  const { name, email } = profile;
+  const { name, email, _id } = profile;
   return (
     <div className="flex flex-col justify-center items-center border border-gray-800 p-4 rounded-lg">
-      <div className="size-16 m-2">
+      <NavLink to={"/user/" + _id} className="size-16 m-2">
         <Avatar name={name} size="100%" round={true} />
-      </div>
+      </NavLink>
       <h1 className="">{name}</h1>
       <p className="text-neutral-700">{"@" + email?.split("@")[0]}</p>
       <button className="px-4 py-1.5 bg-blue-500 rounded-lg my-4">

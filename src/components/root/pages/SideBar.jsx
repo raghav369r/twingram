@@ -21,7 +21,7 @@ const SideBar = () => {
       <ul className="flex flex-col gap-4">
         <li className="transition hover:scale-105">
           {" "}
-          <NavLink to={"/"} className="flex gap-2 md:px-10 py-5">
+          <NavLink to={"/"} className="flex gap-2 py-5">
             <img src="/assets/images/logo.svg" alt="" />
           </NavLink>
         </li>

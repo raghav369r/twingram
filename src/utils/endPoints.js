@@ -1,5 +1,5 @@
-export const Backend = "http://localhost:3000/";
-// export const Backend="https://twingram-backend.onrender.com/";
+// export const Backend = "http://localhost:3000/";
+export const Backend="https://twingram-backend.onrender.com/";
 export const Login_URL = Backend + "auth/login";
 export const Register_URL = Backend + "auth/register";
 export const Post_URL = Backend + "post/new";
