@@ -4,33 +4,40 @@ import { IoIosHeart } from "react-icons/io";
 import { disLikePost, getPost, likePost } from "../../services/posts/post";
 import { useSelector } from "react-redux";
 import Loading from "./Loading";
+import { isLiked } from "../../services/user";
 
 const Like = ({ postele, showLikes }) => {
   const [loading, setLoading] = useState(false);
   const [post, setPost] = useState(null);
+  const [liked, setLiked] = useState(false);
   const user = useSelector((store) => store.user);
+
+  const getIsLiked = async (postId, userId) => {
+    if (!userId || !postId) return setLiked(false);
+    const res = await isLiked(postId, userId);
+    if (!res.error) setLiked(res.liked);
+  };
 
   useEffect(() => {
     setPost(postele);
+    getIsLiked(postele?._id, user?._id);
   }, []);
 
   const handleLike = async () => {
     setLoading(true);
     var res;
-    if (!post?.liked) res = await likePost(post?._id, user?._id);
-    else res = await disLikePost(post?.postId, user?._id);
+    if (!liked) res = await likePost(post?._id, user?._id);
+    else res = await disLikePost(post?._id, user?._id);
+    // setPost(await getPost(post?._id));
+    setPost(res?.post);
+    getIsLiked(post?._id, user?._id);
     setLoading(false);
-    if (!res.error) {
-      var npost = { ...post };
-      npost.liked ? npost.likes-- : npost.likes++;
-      npost.liked = !npost.liked;
-      setPost(npost);
-    }
   };
+
   if (loading) return <Loading />;
   return (
     <div className="flex gap-1 items-center">
-      {post?.liked ? (
+      {liked ? (
         <IoIosHeart
           style={{ color: "red" }}
           className="size-6 cursor-pointer"

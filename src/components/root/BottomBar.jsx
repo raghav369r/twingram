@@ -7,7 +7,7 @@ const BottomBar = () => {
   const dispatch=useDispatch();
   return (
     <div className="flex w-full justify-around items-center bg-black overflow-x-scroll">
-      <NavLink to="/home" className="px-3 py-1.5">Home</NavLink >
+      <NavLink to="/" className="px-3 py-1.5">Home</NavLink >
       <NavLink to="/explore" className="px-3 py-1.5">Explore</NavLink >
       <NavLink to="/people" className="px-3 py-1.5">People</NavLink >
       <NavLink to="/saved" className="px-3 py-1.5">Saved</NavLink >
