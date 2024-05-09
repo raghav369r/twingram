@@ -13,13 +13,16 @@ const TopCreaters = () => {
     getData();
   }, []);
   return (
-    <div>
+    <div className="">
       {data?.map((ele, ind) => (
         <div
           key={ind}
-          className="max-w-64 border-gray-700 border m-10 rounded-lg flex flex-col items-center justify-center p-2"
+          className="mx-auto my-2 max-w-44 border-gray-700 border rounded-lg flex flex-col items-center justify-center p-2"
         >
-          <NavLink to={"/user/"+ele?._id} className="size-20 rounded-full  bg-pink-500" >
+          <NavLink
+            to={"/user/" + ele?._id}
+            className="size-20 rounded-full  bg-pink-500"
+          >
             <Avatar name={ele?.name} size="100%" round={true} />
           </NavLink>
           <h1>{ele?.name}</h1>

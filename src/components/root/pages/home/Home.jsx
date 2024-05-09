@@ -1,7 +1,5 @@
 import TopCreaters from "../TopCreaters";
 import FeedCard from "./FeedCard";
-import { useEffect, useState } from "react";
-import { getFeed } from "../../../../services/posts/post";
 import useGetfeed from "../../../../hooks/useGetfeed";
 
 const Home = () => {
@@ -16,7 +14,7 @@ const Home = () => {
       >
         <h1 className="text-3xl m-4 font-semibold">Home Feed</h1>
         {data?.map((ele, ind) => (
-          <FeedCard key={ind} post={ele} />
+          <FeedCard key={ind} data={ele} />
         ))}
       </div>
       <div className="hidden w-1/4 md:block bg-neutral-900 h-screen overflow-y-scroll">

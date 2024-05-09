@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import Avatar from "react-avatar";
-
 import { FaEdit } from "react-icons/fa";
+
 import SmallPost from "./SmallPost";
-import useGetCuttentUser from "../../../hooks/useGetCuttentUser";
 import useGetProfile from "../../../hooks/useGetProfile";
-import useGetAllUserPosts from "../../../hooks/useGetAllposts";
+// import useGetAllUserPosts from "../.. /../hooks/useGetAllposts";
+import useGetCurrentUser from "../../../hooks/useGetCuttentUser";
 
 const User = () => {
   const { userId } = useParams();
-  const currUser = useGetCuttentUser();
+  const currUser = useGetCurrentUser();
   const [state, setState] = useState("posts");
-  const userProfile = useGetProfile(userId);
-  const posts = useGetAllUserPosts(userId);
-
+  const data = useGetProfile(userId);
+  const { userProfile, posts } = data;
+  
   return (
     <div className="p-5 md:p-14 h-screen overflow-y-scroll">
       <div className="flex justify-between items-start">
@@ -34,14 +34,19 @@ const User = () => {
             </h1>
             <div className="flex gap-5 my-5">
               <h1 className="text-xl">
-                <span className="text-blue-600 mr-2">{userProfile?.posts}</span>posts
+                <span className="text-blue-600 mr-2">{userProfile?.posts}</span>
+                posts
               </h1>
               <h1 className="text-xl">
-                <span className="text-blue-600 mr-2">{userProfile?.followers}</span>
+                <span className="text-blue-600 mr-2">
+                  {userProfile?.followers}
+                </span>
                 Followers
               </h1>
               <h1 className="text-xl">
-                <span className="text-blue-600 mr-2">{userProfile?.following}</span>
+                <span className="text-blue-600 mr-2">
+                  {userProfile?.following}
+                </span>
                 Following
               </h1>
             </div>

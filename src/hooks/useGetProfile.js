@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getUserProfile } from "../services/user";
 
 const useGetProfile = (ownerId) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     const getUser = async () => {
