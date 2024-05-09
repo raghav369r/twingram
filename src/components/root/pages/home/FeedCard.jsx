@@ -8,6 +8,7 @@ const FeedCard = ({ data }) => {
   const navigate = useNavigate();
   const [doubleTap, setDoubleTap] = useState(false);
   const [likedd, setLikedd] = useState(false);
+  const [saved, setSaved] = useState(false);
   const { post, user, liked } = data;
   const handleNavigate = () => {
     if (user?._id) navigate("/user/" + user._id);
@@ -24,7 +25,7 @@ const FeedCard = ({ data }) => {
   return (
     <div className="rounded-xl p-4 m-2 md:p-8 md:m-8 border border-gray-700">
       <div className="flex gap-4 w-full items-center">
-        <div className="size-16">
+        <div className="size-10 md:size-16">
           <Avatar
             name={user?.name}
             size="100%"
@@ -34,12 +35,14 @@ const FeedCard = ({ data }) => {
           />
         </div>
         <div>
-          <h1 className="font-semibold">{user?.name}</h1>
-          <h2 className="text-gray-500">12 hours ago . {post?.location}</h2>
+          <h1 className="font-semibold text-md md:text-xl">{user?.name}</h1>
+          <h2 className="text-gray-500 text-md md:text-lg">
+            12 hours ago . {post?.location}
+          </h2>
         </div>
       </div>
-      <h1 className="my-4">{post?.caption}</h1>
-      <div className="my-2 text-gray-500">
+      <h1 className="my-2 text-sm md:text-lg">{post?.caption}</h1>
+      <div className="my-2 text-gray-500 text-sm md:text-lg">
         {post?.tags?.map((ele) => "#" + ele)}
       </div>
       <div
@@ -60,11 +63,21 @@ const FeedCard = ({ data }) => {
       </div>
       <div className="mx-2 flex justify-between mt-4">
         <Like showLikes={true} postele={post} liked={liked} />
-        <img
-          src="./assets/icons/saved.svg"
-          alt=""
-          className="invert transition brightness-0 size-7 cursor-pointer"
-        />
+        {saved ? (
+          <img
+            onClick={() => setSaved(!saved)}
+            src="./assets/icons/saveFilled.svg"
+            alt=""
+            className="invert transition brightness-0 size-7 cursor-pointer"
+          />
+        ) : (
+          <img
+            onClick={() => setSaved(!saved)}
+            src="./assets/icons/saveOutlined.svg"
+            alt=""
+            className="size-7"
+          />
+        )}
       </div>
     </div>
   );

@@ -62,10 +62,10 @@ const User = () => {
         )}
       </div>
       <div className="py-10">
-        <ul className="flex cursor-pointer">
+        <ul className="grid grid-cols-4 cursor-pointer md:w-2/3">
           <li
             onClick={() => setState("posts")}
-            className={`text-center min-w-28 py-2 text-lg bg-neutral-800 bg-opacity-40 rounded-l-md ${
+            className={`text-center py-2 text-lg bg-neutral-800 bg-opacity-40 rounded-l-md ${
               state === "posts" && " bg-white"
             }`}
           >
@@ -73,7 +73,7 @@ const User = () => {
           </li>
           <li
             onClick={() => setState("liked")}
-            className={`text-center min-w-28 py-2 text-lg bg-neutral-800 bg-opacity-40 ${
+            className={`text-center py-2 text-lg bg-neutral-800 bg-opacity-40 ${
               state === "liked" && " bg-white"
             }`}
           >
@@ -81,14 +81,14 @@ const User = () => {
           </li>
           <li
             onClick={() => setState("saved")}
-            className={`text-center min-w-28 py-2 text-lg bg-neutral-800 bg-opacity-40 ${
+            className={`text-center py-2 text-lg bg-neutral-800 bg-opacity-40 ${
               state === "saved" && " bg-white"
             }`}
           >
             saved
           </li>
           <li
-            className={`text-center min-w-28 py-2 text-lg bg-neutral-800 bg-opacity-40 rounded-r-md ${
+            className={`text-center py-2 text-lg bg-neutral-800 bg-opacity-40 rounded-r-md ${
               state === "" && " bg-white"
             }`}
           >
