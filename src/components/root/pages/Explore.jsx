@@ -2,9 +2,10 @@ import { IoSearchOutline } from "react-icons/io5";
 import { IoFilterSharp } from "react-icons/io5";
 import SmallPost from "./SmallPost";
 import useGetfeed from "../../../hooks/useGetfeed";
+import SmallPostShimmer from "../../shimmers/SmallPostShimmer";
 
 const Explore = () => {
-  const data=useGetfeed();
+  const data = useGetfeed();
   if (data?.error)
     return <h1 className="font-semibold text-2xl">Some thing went wrong</h1>;
 
@@ -31,9 +32,9 @@ const Explore = () => {
           </div>
         </div>
         <div className="grid grid-cols-3">
-          {data?.map((ele, ind) => (
-            <SmallPost ele={ele} key={ind} />
-          ))}
+          {data?.loading
+            ? <SmallPostShimmer/>
+            : data?.map((ele, ind) => <SmallPost ele={ele} key={ind} />)}
         </div>
       </div>
     </div>

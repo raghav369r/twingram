@@ -1,6 +1,7 @@
 import TopCreaters from "../TopCreaters";
 import FeedCard from "./FeedCard";
 import useGetfeed from "../../../../hooks/useGetfeed";
+import FeedShimmer from "../../../shimmers/FeedShimmer";
 
 const Home = () => {
   const data = useGetfeed();
@@ -13,9 +14,11 @@ const Home = () => {
         className={"w-full md:w-3/4 h-screen overflow-y-scroll scrollbar-hide"}
       >
         <h1 className="text-3xl m-4 font-semibold">Home Feed</h1>
-        {data?.map((ele, ind) => (
-          <FeedCard key={ind} data={ele} />
-        ))}
+        {data?.loading ? (
+          <FeedShimmer />
+        ) : (
+          data?.map((ele, ind) => <FeedCard key={ind} data={ele} />)
+        )}
       </div>
       <div className="hidden w-1/4 md:block bg-neutral-900 h-screen overflow-y-scroll">
         <h1 className="text-2xl font-semibold text-center mt-8">

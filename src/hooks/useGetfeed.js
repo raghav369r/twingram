@@ -3,7 +3,7 @@ import { getFeed } from "../services/posts/post";
 import { useSelector } from "react-redux";
 
 const useGetfeed = () => {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState({ loading: true });
   const user = useSelector((store) => store.user);
   const getData = async () => {
     if (!user)

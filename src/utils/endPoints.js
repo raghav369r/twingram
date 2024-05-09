@@ -13,3 +13,4 @@ export const SavePost_URL = Backend + "post/addToSaved/";
 export const RemoveFromSaved_URL = Backend + "post/removeFromSaved/";
 export const GetPost_URL = Backend + "allposts/";
 export const GetIsLiked_URL = Backend + "post/isLiked";
+export const GetLikedPosts_URL = Backend + "post/liked";

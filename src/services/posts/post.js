@@ -2,6 +2,7 @@ import axios from "axios";
 import {
   DisLikePost_URL,
   Feed_URL,
+  GetLikedPosts_URL,
   GetPost_URL,
   LikePost_URL,
   Post_URL,
@@ -9,7 +10,15 @@ import {
   SavePost_URL,
   UserPosts_URL,
 } from "../../utils/endPoints";
-import { useSelector } from "react-redux";
+
+export const getLikedPosts = async (userId) => {
+  try {
+    const res = await axios.post(GetLikedPosts_URL, { userId });
+    return res.data;
+  } catch (ex) {
+    return { error: ex, message: "unable to connect to server!!" };
+  }
+};
 
 export const getPost = async (postId) => {
   try {

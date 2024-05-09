@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { getAllUsers } from "../services/user";
 
-const useGetAlluUsers = () => {
-  const [data, setData] = useState(null);
+const useGetAllUsers = () => {
+  const [data, setData] = useState({loading:true});
   useEffect(() => {
     const getData = async () => {
       const res = await getAllUsers();
@@ -13,4 +13,4 @@ const useGetAlluUsers = () => {
   return data;
 };
 
-export default useGetAlluUsers;
+export default useGetAllUsers;

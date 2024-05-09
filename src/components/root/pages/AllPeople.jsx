@@ -1,7 +1,8 @@
 import { NavLink } from "react-router-dom";
 import Avatar from "react-avatar";
 import { IoSearchOutline } from "react-icons/io5";
-import useGetAlluUsers from "../../../hooks/useGetAlluUsers";
+import useGetAllUsers from "../../../hooks/useGetAllUsers";
+import UserShimmer from "../../shimmers/UserShimmer";
 
 const Profile = ({ profile }) => {
   const { name, email, _id } = profile;
@@ -20,7 +21,7 @@ const Profile = ({ profile }) => {
 };
 
 const AllPeople = () => {
-  const data = useGetAlluUsers();
+  const data = useGetAllUsers();
   return (
     <div className="p-2 md:p-10 h-screen overflow-y-scroll">
       <h1 className="font-semibold text-3xl ">Search People</h1>
@@ -39,9 +40,11 @@ const AllPeople = () => {
         <h1 className="text-xl font-semibold">People You Might Know</h1>
       </div>
       <div className="my-4 grid grid-cols-2  md:grid-cols-4 gap-2">
-        {data?.map((ele, ind) => (
-          <Profile key={ind} profile={ele} />
-        ))}
+        {data?.loading ? (
+          <UserShimmer />
+        ) : (
+          data?.map((ele, ind) => <Profile key={ind} profile={ele} />)
+        )}
       </div>
     </div>
   );

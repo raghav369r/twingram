@@ -7,6 +7,7 @@ import SmallPost from "./SmallPost";
 import useGetProfile from "../../../hooks/useGetProfile";
 // import useGetAllUserPosts from "../.. /../hooks/useGetAllposts";
 import useGetCurrentUser from "../../../hooks/useGetCuttentUser";
+import useGetLikedPosts from "../../../hooks/useGetLikedPosts";
 
 const User = () => {
   const { userId } = useParams();
@@ -14,7 +15,8 @@ const User = () => {
   const [state, setState] = useState("posts");
   const data = useGetProfile(userId);
   const { userProfile, posts } = data;
-  
+  const likedPosts = useGetLikedPosts(userId);
+
   return (
     <div className="p-5 md:p-14 h-screen overflow-y-scroll">
       <div className="flex justify-between items-start">
@@ -97,9 +99,8 @@ const User = () => {
       <div className="grid grid-cols-4">
         {state === "posts" &&
           posts?.map((ele, ind) => <SmallPost key={ind} ele={ele} />)}
-        {state === "liked" && (
-          <h1 className="text-center text-xl">No Liked Posts</h1>
-        )}
+        {state === "liked" &&
+          likedPosts?.map((ele, ind) => <SmallPost key={ind} ele={ele} />)}
         {state === "saved" && (
           <h1 className="text-center text-xl">No Saved Posts</h1>
         )}
