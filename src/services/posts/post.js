@@ -9,6 +9,7 @@ import {
   SavePost_URL,
   UserPosts_URL,
 } from "../../utils/endPoints";
+import { useSelector } from "react-redux";
 
 export const getPost = async (postId) => {
   try {
@@ -28,9 +29,9 @@ export const addPost = async (data) => {
   }
 };
 
-export const getFeed = async (data) => {
+export const getFeed = async (userId) => {
   try {
-    const res = await axios.get(Feed_URL);
+    const res = await axios.post(Feed_URL, { userId });
     return res.data;
   } catch (ex) {
     console.log(ex);

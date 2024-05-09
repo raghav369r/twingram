@@ -1,8 +1,5 @@
 import { IoSearchOutline } from "react-icons/io5";
 import { IoFilterSharp } from "react-icons/io5";
-import Like from "../../shared/Like";
-import { useEffect, useState } from "react";
-import { getFeed } from "../../../services/posts/post";
 import SmallPost from "./SmallPost";
 import useGetfeed from "../../../hooks/useGetfeed";
 
@@ -12,7 +9,7 @@ const Explore = () => {
     return <h1 className="font-semibold text-2xl">Some thing went wrong</h1>;
 
   return (
-    <div className="p-10 h-screen overflow-y-scroll">
+    <div className="p-2 md:p-10 h-screen overflow-y-scroll">
       <h1 className="font-semibold text-3xl ">Search Posts</h1>
       <div className="flex w-full items-center my-4">
         <label className="bg-neutral-800 p-4 rounded-l-lg">

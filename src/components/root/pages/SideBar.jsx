@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { NavLink, useLocation } from "react-router-dom";
 import { IoHomeOutline } from "react-icons/io5";
 import { MdExplore } from "react-icons/md";

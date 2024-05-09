@@ -1,10 +1,7 @@
-import { useEffect, useState } from "react";
-import { IoSearchOutline } from "react-icons/io5";
-import { IoFilterSharp } from "react-icons/io5";
-import { getAllUsers } from "../../../services/user";
-import Avatar from "react-avatar";
-import useGetAlluUsers from "../../../hooks/useGetAlluUsers";
 import { NavLink } from "react-router-dom";
+import Avatar from "react-avatar";
+import { IoSearchOutline } from "react-icons/io5";
+import useGetAlluUsers from "../../../hooks/useGetAlluUsers";
 
 const Profile = ({ profile }) => {
   const { name, email, _id } = profile;
@@ -25,7 +22,7 @@ const Profile = ({ profile }) => {
 const AllPeople = () => {
   const data = useGetAlluUsers();
   return (
-    <div className="p-10 h-screen overflow-y-scroll">
+    <div className="p-2 md:p-10 h-screen overflow-y-scroll">
       <h1 className="font-semibold text-3xl ">Search People</h1>
       <div className="flex w-full items-center my-4">
         <label className="bg-neutral-800 p-4 rounded-l-lg">

@@ -29,10 +29,7 @@ const Siginin = () => {
       name: name,
       password: password,
     };
-    // setTimeout(() => {
-    //   setLoading(false);
-    //   dispatch(setUser({ name: "Raghav", email: "Raghav@reddy" }));
-    // }, 2000);
+    
     const res = await register(data);
     if (res?.error) setError(res.error);
     else dispatch(setUser(res));

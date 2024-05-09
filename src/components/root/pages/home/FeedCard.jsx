@@ -1,31 +1,28 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Avatar from "react-avatar";
 import { IoIosHeart } from "react-icons/io";
 import Like from "../../../shared/Like";
-import Avatar from "react-avatar";
-import { getUserProfile } from "../../../../services/user";
-import { useNavigate } from "react-router-dom";
-import useGetProfile from "../../../../hooks/useGetProfile";
 
-const FeedCard = ({ post }) => {
+const FeedCard = ({ data }) => {
   const navigate = useNavigate();
   const [doubleTap, setDoubleTap] = useState(false);
-  const [liked, setLiked] = useState(false);
-  const user = useGetProfile(post?.ownerId);
-
+  const [likedd, setLikedd] = useState(false);
+  const { post, user, liked } = data;
   const handleNavigate = () => {
-    if (user._id) navigate("/user/" + user._id);
+    if (user?._id) navigate("/user/" + user._id);
   };
 
   const handleDoubleTap = () => {
-    setLiked(true);
+    setLikedd(true);
     setDoubleTap(true);
     setTimeout(() => {
       setDoubleTap(false);
-    }, 500);
+    }, 1000);
   };
 
   return (
-    <div className="rounded-xl p-8 m-8 border border-gray-700">
+    <div className="rounded-xl p-4 m-2 md:p-8 md:m-8 border border-gray-700">
       <div className="flex gap-4 w-full items-center">
         <div className="size-16">
           <Avatar
@@ -56,13 +53,13 @@ const FeedCard = ({ post }) => {
         />
         {doubleTap && (
           <IoIosHeart
-            style={{ color: "red" }}
-            className="size-40 animate-ping duration-1000 absolute z-10"
+            style={{ color: "white" }}
+            className="size-28 transition delay-150 absolute z-10"
           />
         )}
       </div>
       <div className="mx-2 flex justify-between mt-4">
-        <Like showLikes={true} postele={post} />
+        <Like showLikes={true} postele={post} liked={liked} />
         <img
           src="./assets/icons/saved.svg"
           alt=""
