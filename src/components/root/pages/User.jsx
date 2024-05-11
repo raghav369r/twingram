@@ -8,11 +8,13 @@ import useGetProfile from "../../../hooks/useGetProfile";
 // import useGetAllUserPosts from "../.. /../hooks/useGetAllposts";
 import useGetCurrentUser from "../../../hooks/useGetCuttentUser";
 import useGetLikedPosts from "../../../hooks/useGetLikedPosts";
+import AbsolutePost from "../../shared/AbsolutePost";
 
 const User = () => {
   const { userId } = useParams();
   const currUser = useGetCurrentUser();
   const [state, setState] = useState("posts");
+  const [show, setShow] = useState(-1);
   const data = useGetProfile(userId);
   const { userProfile, posts } = data;
   const likedPosts = useGetLikedPosts(userId);
@@ -98,13 +100,18 @@ const User = () => {
       </div>
       <div className="grid grid-cols-4">
         {state === "posts" &&
-          posts?.map((ele, ind) => <SmallPost key={ind} ele={ele} />)}
+          posts?.map((ele, ind) => <div key={ind} onClick={()=>setShow(ind)}><SmallPost ele={ele} /></div>)}
         {state === "liked" &&
-          likedPosts?.map((ele, ind) => <SmallPost key={ind} ele={ele} />)}
+          likedPosts?.map((ele, ind) => <div key={ind} onClick={()=>setShow(ind)}><SmallPost ele={ele} /></div>)}
         {state === "saved" && (
           <h1 className="text-center text-xl">No Saved Posts</h1>
         )}
       </div>
+      <AbsolutePost
+        data={(state == "posts" && posts) || (state == "liked" && likedPosts)}
+        setShow={setShow}
+        show={show}
+      />
     </div>
   );
 };

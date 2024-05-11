@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Avatar from "react-avatar";
 import { IoIosHeart } from "react-icons/io";
 import Like from "../../../shared/Like";
+import ProfileNTime from "../../../shared/ProfileNTime";
 
 const FeedCard = ({ data }) => {
   const navigate = useNavigate();
@@ -10,9 +11,6 @@ const FeedCard = ({ data }) => {
   const [likedd, setLikedd] = useState(false);
   const [saved, setSaved] = useState(false);
   const { post, user, liked } = data;
-  const handleNavigate = () => {
-    if (user?._id) navigate("/user/" + user._id);
-  };
 
   const handleDoubleTap = () => {
     setLikedd(true);
@@ -24,23 +22,7 @@ const FeedCard = ({ data }) => {
 
   return (
     <div className="rounded-xl p-4 m-2 md:p-8 md:m-8 border border-gray-700">
-      <div className="flex gap-4 w-full items-center">
-        <div className="size-10 md:size-16">
-          <Avatar
-            name={user?.name}
-            size="100%"
-            round={true}
-            className="cursor-pointer"
-            onClick={handleNavigate}
-          />
-        </div>
-        <div>
-          <h1 className="font-semibold text-md md:text-xl">{user?.name}</h1>
-          <h2 className="text-gray-500 text-md md:text-lg">
-            12 hours ago . {post?.location}
-          </h2>
-        </div>
-      </div>
+      <ProfileNTime user={user} post={post} />
       <h1 className="my-2 text-sm md:text-lg">{post?.caption}</h1>
       <div className="my-2 text-gray-500 text-sm md:text-lg">
         {post?.tags?.map((ele) => "#" + ele)}
