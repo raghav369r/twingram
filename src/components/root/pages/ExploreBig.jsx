@@ -1,17 +1,19 @@
 import React from "react";
 import { IoCloseSharp } from "react-icons/io5";
 import Like from "../../shared/Like";
-import Avatar from "react-avatar";
-import { Navigate } from "react-router-dom";
 import ProfileNTime from "../../shared/ProfileNTime";
+import Save from "../../shared/Save";
 
 const ExploreBig = ({ post: data, handleClose }) => {
-  const { post, user, liked } = data;
+  const { post, user, liked,saved } = data;
   if (!data) return null;
 
   return (
     <div className="flex md:flex-row flex-col h-full relative overflow-y-scroll">
-      <img src={post.imageUrl} className="h-80 p-2 md:w-1/2 md:h-auto object-contain" />
+      <img
+        src={post.imageUrl}
+        className="h-80 p-2 md:w-1/2 md:h-auto object-contain"
+      />
       <div className="md:w-1/2  h-full flex flex-col p-4">
         <ProfileNTime post={post} user={user} />
         <hr className="border-neutral-700 mt-4" />
@@ -23,11 +25,7 @@ const ExploreBig = ({ post: data, handleClose }) => {
         </div>
         <div className=" flex justify-between w-full h-fit p-4">
           <Like showLikes={true} postele={post} liked={liked} />
-          <img
-            src="./assets/icons/saveOutlined.svg"
-            alt=""
-            className=" size-7 cursor-pointer"
-          />
+          <Save postele={post} savedp={saved} />
         </div>
       </div>
       <h1

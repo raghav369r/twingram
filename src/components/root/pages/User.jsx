@@ -9,6 +9,7 @@ import useGetProfile from "../../../hooks/useGetProfile";
 import useGetCurrentUser from "../../../hooks/useGetCuttentUser";
 import useGetLikedPosts from "../../../hooks/useGetLikedPosts";
 import AbsolutePost from "../../shared/AbsolutePost";
+import useGetSavedPosts from "../../../hooks/useGetSavedPosts";
 
 const User = () => {
   const { userId } = useParams();
@@ -18,7 +19,7 @@ const User = () => {
   const data = useGetProfile(userId);
   const { userProfile, posts } = data;
   const likedPosts = useGetLikedPosts(userId);
-
+  const savedPosts = useGetSavedPosts(userId);
   return (
     <div className="p-5 md:p-14 h-screen overflow-y-scroll">
       <div className="flex justify-between items-start">
@@ -100,15 +101,29 @@ const User = () => {
       </div>
       <div className="grid grid-cols-4">
         {state === "posts" &&
-          posts?.map((ele, ind) => <div key={ind} onClick={()=>setShow(ind)}><SmallPost ele={ele} /></div>)}
+          posts?.map((ele, ind) => (
+            <div key={ind} onClick={() => setShow(ind)}>
+              <SmallPost ele={ele} /> 
+            </div>
+          ))}
         {state === "liked" &&
-          likedPosts?.map((ele, ind) => <div key={ind} onClick={()=>setShow(ind)}><SmallPost ele={ele} /></div>)}
-        {state === "saved" && (
-          <h1 className="text-center text-xl">No Saved Posts</h1>
+          likedPosts?.map((ele, ind) => (
+            <div key={ind} onClick={() => setShow(ind)}>
+              <SmallPost ele={ele} />
+            </div>
+          ))}
+        {state === "saved" &&
+          savedPosts?.map((ele, ind) => (
+            <div key={ind} onClick={() => setShow(ind)}>
+              <SmallPost ele={ele} />
+            </div>
+          ))}
+        {state === "tagged" && (
+          <h1 className="text-center text-xl">Under Coding...</h1>
         )}
       </div>
       <AbsolutePost
-        data={(state == "posts" && posts) || (state == "liked" && likedPosts)}
+        data={(state == "posts" && posts) || (state == "liked" && likedPosts) || (state=="saved" && savedPosts)}
         setShow={setShow}
         show={show}
       />

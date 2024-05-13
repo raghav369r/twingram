@@ -26,7 +26,7 @@ const TopCreaters = () => {
             <Avatar name={ele?.name} size="100%" round={true} />
           </NavLink>
           <h1>{ele?.name}</h1>
-          <p className="text-gray-700">{"@" + ele?.email.split("@")[0]}</p>
+          <p className="text-gray-700">{"@" + ele?.email?.split("@")[0]}</p>
           <button className="px-4 py-1.5 bg-blue-500 rounded-lg my-4">
             Follow
           </button>

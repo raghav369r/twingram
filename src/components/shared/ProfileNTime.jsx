@@ -26,7 +26,7 @@ const ProfileNTime = ({ user, post }) => {
     else if (weeksDiff) setTime(weeksDiff + " weeks ago");
     else if (daysDiff) setTime(daysDiff + " days ago");
     else if (hoursDiff) setTime(hoursDiff + " hours ago");
-    else if (minutesDiff) setTime(minutesDiff + " weeks ago");
+    else if (minutesDiff) setTime(minutesDiff + " mins ago");
     else setTime(currDate.Date());
   }, []);
   return (

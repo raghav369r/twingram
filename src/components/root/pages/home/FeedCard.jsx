@@ -1,16 +1,15 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Avatar from "react-avatar";
 import { IoIosHeart } from "react-icons/io";
 import Like from "../../../shared/Like";
 import ProfileNTime from "../../../shared/ProfileNTime";
+import Save from "../../../shared/Save";
 
 const FeedCard = ({ data }) => {
   const navigate = useNavigate();
   const [doubleTap, setDoubleTap] = useState(false);
   const [likedd, setLikedd] = useState(false);
-  const [saved, setSaved] = useState(false);
-  const { post, user, liked } = data;
+  const { post, user, liked, saved } = data;
 
   const handleDoubleTap = () => {
     setLikedd(true);
@@ -45,21 +44,7 @@ const FeedCard = ({ data }) => {
       </div>
       <div className="mx-2 flex justify-between mt-4">
         <Like showLikes={true} postele={post} liked={liked} />
-        {saved ? (
-          <img
-            onClick={() => setSaved(!saved)}
-            src="./assets/icons/saveFilled.svg"
-            alt=""
-            className="invert transition brightness-0 size-7 cursor-pointer"
-          />
-        ) : (
-          <img
-            onClick={() => setSaved(!saved)}
-            src="./assets/icons/saveOutlined.svg"
-            alt=""
-            className="size-7"
-          />
-        )}
+        <Save postele={post} savedp={saved} />
       </div>
     </div>
   );
