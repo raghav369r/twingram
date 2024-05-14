@@ -15,3 +15,5 @@ export const GetPost_URL = Backend + "allposts/";
 export const GetIsLiked_URL = Backend + "post/isLiked";
 export const GetLikedPosts_URL = Backend + "post/liked";
 export const GetSavedPosts_URL = Backend + "post/saved";
+export const GetFollow_URL = Backend + "profile/follow";
+export const GetUnFollow_URL = Backend + "profile/unFollow";

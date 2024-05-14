@@ -3,9 +3,14 @@ import Avatar from "react-avatar";
 import { IoSearchOutline } from "react-icons/io5";
 import useGetAllUsers from "../../../hooks/useGetAllUsers";
 import UserShimmer from "../../shimmers/UserShimmer";
+import { useSelector } from "react-redux";
+import useGetCuttentUser from "../../../hooks/useGetCuttentUser";
+import Follow from "../../shared/Follow";
 
 const Profile = ({ profile }) => {
-  const { name, email, _id } = profile;
+  const { user, following } = profile;
+  const { _id, email, name } = user;
+  const curruser = useGetCuttentUser();
   return (
     <div className="flex flex-col justify-center items-center border border-gray-800 p-4 rounded-lg">
       <NavLink to={"/user/" + _id} className="size-16 m-2">
@@ -13,9 +18,7 @@ const Profile = ({ profile }) => {
       </NavLink>
       <h1 className="">{name}</h1>
       <p className="text-neutral-700">{"@" + email?.split("@")[0]}</p>
-      <button className="px-4 py-1.5 bg-blue-500 rounded-lg my-4">
-        Follow
-      </button>
+      <Follow followingu={following} userId1={curruser?._id} userId2={_id} />
     </div>
   );
 };

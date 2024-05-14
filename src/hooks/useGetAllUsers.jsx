@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { getAllUsers } from "../services/user";
+import useGetCuttentUser from "./useGetCuttentUser";
 
 const useGetAllUsers = () => {
-  const [data, setData] = useState({loading:true});
+  const user = useGetCuttentUser();
+  const [data, setData] = useState({ loading: true });
   useEffect(() => {
     const getData = async () => {
-      const res = await getAllUsers();
+      const res = await getAllUsers(user._id);
       setData(res);
     };
     getData();

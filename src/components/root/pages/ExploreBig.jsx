@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { IoCloseSharp } from "react-icons/io5";
 import Like from "../../shared/Like";
 import ProfileNTime from "../../shared/ProfileNTime";
 import Save from "../../shared/Save";
 
 const ExploreBig = ({ post: data, handleClose }) => {
+  useEffect(()=>{
+    const handleKeyPress=(e)=>{
+      if(e.key=='Escape') handleClose();
+    }
+    window.addEventListener('keydown', handleKeyPress);
+    return ()=>{
+      window.removeEventListener('keydown', handleKeyPress);
+    }
+  },[]);
   const { post, user, liked,saved } = data;
   if (!data) return null;
 

@@ -1,35 +1,34 @@
-import { useEffect, useState } from "react";
-import Avatar from "react-avatar";
-import { getAllUsers } from "../../../services/user";
 import { NavLink } from "react-router-dom";
+import Avatar from "react-avatar";
+import Follow from "../../shared/Follow";
+import useGetAllUsers from "../../../hooks/useGetAllUsers";
+import useGetCuttentUser from "../../../hooks/useGetCuttentUser";
 
 const TopCreaters = () => {
-  const [data, setData] = useState(null);
-  useEffect(() => {
-    const getData = async () => {
-      const res = await getAllUsers();
-      setData(res);
-    };
-    getData();
-  }, []);
+  const data = useGetAllUsers();
+  const curruser=useGetCuttentUser();
+  if (data.loading) return <h1>loading</h1>;
+  if (data.error) return null;
   return (
     <div className="">
-      {data?.map((ele, ind) => (
+      {data?.map(({ following, user }, ind) => (
         <div
           key={ind}
           className="mx-auto my-2 max-w-44 border-gray-700 border rounded-lg flex flex-col items-center justify-center p-2"
         >
           <NavLink
-            to={"/user/" + ele?._id}
+            to={"/user/" + user?._id}
             className="size-20 rounded-full  bg-pink-500"
           >
-            <Avatar name={ele?.name} size="100%" round={true} />
+            <Avatar name={user?.name} size="100%" round={true} />
           </NavLink>
-          <h1>{ele?.name}</h1>
-          <p className="text-gray-700">{"@" + ele?.email?.split("@")[0]}</p>
-          <button className="px-4 py-1.5 bg-blue-500 rounded-lg my-4">
-            Follow
-          </button>
+          <h1>{user?.name}</h1>
+          <p className="text-gray-700">{"@" + user?.email?.split("@")[0]}</p>
+          <Follow
+            followingu={following}
+            userId1={curruser?._id}
+            userId2={user?._id}
+          />
         </div>
       ))}
     </div>
