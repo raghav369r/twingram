@@ -21,7 +21,7 @@ const User = () => {
   const likedPosts = useGetLikedPosts(userId);
   const savedPosts = useGetSavedPosts(userId);
   return (
-    <div className="p-5 md:p-14 h-screen overflow-y-scroll">
+    <div className="p-5 md:p-14 h-[100dvh] overflow-y-scroll">
       <div className="flex justify-between items-start">
         <div className="flex flex-col justify-center md:flex-row gap-10 items-center">
           <div className="size-32">

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "./axiosInstance";
 import { Login_URL, Register_URL } from "../utils/endPoints";
 
 export const login = async (data) => {

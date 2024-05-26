@@ -26,7 +26,7 @@ const Profile = ({ profile }) => {
 const AllPeople = () => {
   const data = useGetAllUsers();
   return (
-    <div className="p-2 md:p-10 h-screen overflow-y-scroll">
+    <div className="p-2 md:p-10 h-[100dvh] overflow-y-scroll">
       <h1 className="font-semibold text-3xl ">Search People</h1>
       <div className="flex w-full items-center my-4">
         <label className="bg-neutral-800 p-4 rounded-l-lg">

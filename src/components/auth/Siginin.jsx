@@ -5,6 +5,7 @@ import { setUser } from "../../config/store/userReducer";
 import { useRef, useState } from "react";
 import Loading from "../shared/Loading";
 import { register } from "../../services/auth";
+import { decodeJwt, setJwt } from "../../services/localSt";
 
 const Siginin = () => {
   const dispatch = useDispatch();
@@ -29,15 +30,18 @@ const Siginin = () => {
       name: name,
       password: password,
     };
-    
+
     const res = await register(data);
     if (res?.error) setError(res.error);
-    else dispatch(setUser(res));
+    else {
+      setJwt(res.token);
+      dispatch(setUser(decodeJwt(res.token)));
+    }
     setLoading(false);
   };
 
   return (
-    <div className="flex justify-center items-center h-screen overflow-y-scroll">
+    <div className="flex justify-center items-center h-[100dvh] overflow-y-scroll">
       <form className="">
         <img src={logo} alt="" className="" />
         <h1 className="text-center text-3xl my-4 font-semibold">

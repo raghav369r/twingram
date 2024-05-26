@@ -9,7 +9,7 @@ const Saved = () => {
   const savedPosts = useGetSavedPosts(user?._id);
   const [show, setShow] = useState(-1);
   return (
-    <div className="p-2 md:p-10 h-screen overflow-y-scroll">
+    <div className="p-2 md:p-10 h-[100dvh] overflow-y-scroll">
       <h1 className="text-3xl font-semibold my-10">Saved Posts</h1>
       {savedPosts.length == 0 && <h1 className="text-3xl">No saved posts</h1>}
       <div className="grid grid-cols-3 gap-1">

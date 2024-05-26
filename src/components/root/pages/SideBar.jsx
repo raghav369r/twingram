@@ -8,12 +8,14 @@ import { MdCreateNewFolder } from "react-icons/md";
 import { removeUser } from "../../../config/store/userReducer";
 import Avatar from "react-avatar";
 import useGetCuttentUser from "../../../hooks/useGetCuttentUser";
+import { removeJwt } from "../../../services/localSt";
 
 const SideBar = () => {
   const user = useGetCuttentUser();
   const { pathname } = useLocation();
   const dispatch = useDispatch();
   const handleLogout = () => {
+    removeJwt();
     dispatch(removeUser());
   };
   return (

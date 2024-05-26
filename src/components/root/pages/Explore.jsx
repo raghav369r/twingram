@@ -14,7 +14,7 @@ const Explore = () => {
     return <h1 className="font-semibold text-2xl">Some thing went wrong</h1>;
 
   return (
-    <div className="p-2 md:p-10 h-screen overflow-y-scroll">
+    <div className="p-2 md:p-10 h-[100dvh] overflow-y-scroll">
       <h1 className="font-semibold text-3xl ">Search Posts</h1>
       <div className="flex w-full items-center my-4">
         <label className="bg-neutral-800 p-4 rounded-l-lg">

@@ -7,7 +7,7 @@ const AbsolutePost = ({ data, setShow, show }) => {
     return (
     <div>
       {show != -1 && (
-        <div className="absolute w-screen h-screen top-0 left-0 z-10 flex items-center">
+        <div className="absolute w-screen h-[100dvh] top-0 left-0 z-10 flex items-center">
           <div className="flex items-center">
             <button
               disabled={show === 0}

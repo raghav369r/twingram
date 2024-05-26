@@ -5,15 +5,16 @@ import { setUser } from "../../config/store/userReducer";
 import { useRef, useState } from "react";
 import Loading from "../shared/Loading";
 import { login } from "../../services/auth";
+import { decodeJwt, setJwt } from "../../services/localSt";
 
 const SiginUp = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-  const [error, setError]=useState("");
+  const [error, setError] = useState("");
   const emailref = useRef(null);
   const passwordref = useRef(null);
 
-  const handleSignin = async(e) => {
+  const handleSignin = async (e) => {
     e.preventDefault();
     const email = emailref?.current?.value;
     const password = passwordref?.current?.value;
@@ -25,14 +26,17 @@ const SiginUp = () => {
       email: email,
       password: password,
     };
-    
+
     const res = await login(data);
     if (res?.error) setError(res.error);
-    else dispatch(setUser(res));
+    else {
+      setJwt(res.token);
+      dispatch(setUser(decodeJwt(res.token)));
+    }
     setLoading(false);
   };
   return (
-    <div className="flex w-full h-screen justify-center items-center">
+    <div className="flex w-full h-[100dvh] justify-center items-center">
       <form className="">
         <img src={logo} alt="" className="" />
         <h1 className="text-center text-3xl my-4 font-semibold">

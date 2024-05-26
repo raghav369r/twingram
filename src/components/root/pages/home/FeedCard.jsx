@@ -1,18 +1,14 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { IoIosHeart } from "react-icons/io";
 import Like from "../../../shared/Like";
 import ProfileNTime from "../../../shared/ProfileNTime";
 import Save from "../../../shared/Save";
 
 const FeedCard = ({ data }) => {
-  const navigate = useNavigate();
   const [doubleTap, setDoubleTap] = useState(false);
-  const [likedd, setLikedd] = useState(false);
   const { post, user, liked, saved } = data;
 
   const handleDoubleTap = () => {
-    setLikedd(true);
     setDoubleTap(true);
     setTimeout(() => {
       setDoubleTap(false);

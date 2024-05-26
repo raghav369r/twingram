@@ -7,7 +7,7 @@ const useGetAllUsers = () => {
   const [data, setData] = useState({ loading: true });
   useEffect(() => {
     const getData = async () => {
-      const res = await getAllUsers(user._id);
+      const res = await getAllUsers(user?._id);
       setData(res);
     };
     getData();

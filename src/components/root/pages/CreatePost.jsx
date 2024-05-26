@@ -39,7 +39,7 @@ const CreatePost = () => {
   }
 
   return (
-    <div className="h-screen overflow-y-scroll">
+    <div className="h-[100dvh] overflow-y-scroll">
       <h1 className="text-3xl font-semibold">Create Post</h1>
       <form className="felx flex-row gap-4 p-2 md:p-10">
         <label className="my-4">Caption</label>
