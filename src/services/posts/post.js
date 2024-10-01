@@ -39,9 +39,9 @@ export const getPost = async (postId) => {
   }
 };
 
-export const addPost = async (data) => {
+export const addPost = async (formData) => {
   try {
-    const res = await axios.post(Post_URL, { ...data });
+    const res = await axios.post(Post_URL, formData, {headers:{"Content-Type":'multipart/form-data'}});
     return res.data;
   } catch (ex) {
     return { error: ex };

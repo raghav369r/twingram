@@ -10,12 +10,14 @@ import useGetCurrentUser from "../../../hooks/useGetCuttentUser";
 import useGetLikedPosts from "../../../hooks/useGetLikedPosts";
 import AbsolutePost from "../../shared/AbsolutePost";
 import useGetSavedPosts from "../../../hooks/useGetSavedPosts";
+import Edit from "./Edit";
 
 const User = () => {
   const { userId } = useParams();
   const currUser = useGetCurrentUser();
   const [state, setState] = useState("posts");
   const [show, setShow] = useState(-1);
+  const [edit, setEdit] = useState(false);
   const data = useGetProfile(userId);
   const { userProfile, posts } = data;
   const likedPosts = useGetLikedPosts(userId);
@@ -25,7 +27,14 @@ const User = () => {
       <div className="flex justify-between items-start">
         <div className="flex flex-col justify-center md:flex-row gap-10 items-center">
           <div className="size-32">
-            <Avatar size="100%" name={userProfile?.name} round={true} />
+            {userProfile?.profileUrl ? (
+              <img
+                src={userProfile.profileUrl}
+                className="size-full rounded-full object-contain"
+              />
+            ) : (
+              <Avatar size="100%" name={userProfile?.name} round={true} />
+            )}
           </div>
           <div className="flex flex-col justify-between items-baseline">
             <div className="">
@@ -58,9 +67,12 @@ const User = () => {
           </div>
         </div>
         {userId == currUser?._id && (
-          <button className="flex px-6 py-2 bg-neutral-700 bg-opacity-55 rounded-md items-center gap-2">
-            <FaEdit className="" />
-            <p>Edit profile</p>
+          <button
+            className="flex px-6 py-2 bg-neutral-700 bg-opacity-55 rounded-md items-center gap-2"
+            onClick={() => setEdit(!edit)}
+          >
+            {!edit && <FaEdit className="" />}
+            <p>{edit ? "Save" : "Edit"}</p>
           </button>
         )}
       </div>
@@ -103,7 +115,7 @@ const User = () => {
         {state === "posts" &&
           posts?.map((ele, ind) => (
             <div key={ind} onClick={() => setShow(ind)}>
-              <SmallPost ele={ele} /> 
+              <SmallPost ele={ele} />
             </div>
           ))}
         {state === "liked" &&
@@ -123,10 +135,15 @@ const User = () => {
         )}
       </div>
       <AbsolutePost
-        data={(state == "posts" && posts) || (state == "liked" && likedPosts) || (state=="saved" && savedPosts)}
+        data={
+          (state == "posts" && posts) ||
+          (state == "liked" && likedPosts) ||
+          (state == "saved" && savedPosts)
+        }
         setShow={setShow}
         show={show}
       />
+      {edit && <Edit user={userProfile} setEdit={setEdit} />}
     </div>
   );
 };

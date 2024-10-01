@@ -7,6 +7,7 @@ const useGetProfile = (ownerId) => {
   useEffect(() => {
     const getUser = async () => {
       const res = await getUserProfile(ownerId);
+      console.log(res)
       setUser(res);
     };
     if (!ownerId) setUser({ error: "error getting user!!" });

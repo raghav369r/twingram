@@ -11,13 +11,11 @@ import Saved from "./components/root/pages/Saved";
 import CreatePost from "./components/root/pages/CreatePost";
 import User from "./components/root/pages/User";
 import useGetLocalUser from "./hooks/useGetLocalUser";
-import Wakeup from "./components/root/Wakeup";
 
 const App = () => {
   useGetLocalUser();
   return (
     <main className="font-customFont text-white">
-      <Wakeup />
       <Routes>
         <Route element={<AuthLayout />}>
           <Route path="/sign-in" element={<Siginin />} />

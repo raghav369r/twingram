@@ -9,7 +9,6 @@ const useGetLocalUser = () => {
     const token = getJwt();
     if (token) dispatch(setUser(decodeJwt(token)));
   }, []);
-  return null;
 };
 
 export default useGetLocalUser;

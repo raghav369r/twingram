@@ -35,11 +35,12 @@ export const getUserProfile = async (id) => {
 };
 
 export const getAllUsers = async (userId) => {
-  if(!userId) return;
+  if (!userId) return;
   try {
     const res = await axios.post(Profile_URL, { userId });
     return res.data;
   } catch (ex) {
+    console.log("error");
     console.log(ex);
     return ex;
   }

@@ -7,8 +7,8 @@ import useGetCuttentUser from "../../../hooks/useGetCuttentUser";
 const TopCreaters = () => {
   const data = useGetAllUsers();
   const curruser=useGetCuttentUser();
-  if (data.loading) return <h1>loading</h1>;
-  if (data.error) return null;
+  if (data?.loading) return <h1>loading</h1>;
+  if (data?.error) return null;
   return (
     <div className="">
       {data?.map(({ following, user }, ind) => (

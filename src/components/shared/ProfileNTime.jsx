@@ -22,7 +22,7 @@ const ProfileNTime = ({ user, post }) => {
     const daysDiff = differenceInDays(currDate, uploadTime);
     const weeksDiff = differenceInWeeks(currDate, uploadTime);
     // console.log(minutesDiff, hoursDiff, daysDiff, weeksDiff);
-    if (weeksDiff > 10) setTime(uploadTime.getDate());
+    if (weeksDiff > 10) setTime(uploadTime?.getDate?.());
     else if (weeksDiff) setTime(weeksDiff + " weeks ago");
     else if (daysDiff) setTime(daysDiff + " days ago");
     else if (hoursDiff) setTime(hoursDiff + " hours ago");
