@@ -1,20 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import Avatar from "react-avatar";
-
 import { FaEdit } from "react-icons/fa";
+
 import SmallPost from "./SmallPost";
-import useGetCuttentUser from "../../../hooks/useGetCuttentUser";
 import useGetProfile from "../../../hooks/useGetProfile";
-import useGetAllUserPosts from "../../../hooks/useGetAllposts";
+// import useGetAllUserPosts from "../.. /../hooks/useGetAllposts";
+import useGetCurrentUser from "../../../hooks/useGetCuttentUser";
+import useGetLikedPosts from "../../../hooks/useGetLikedPosts";
+import AbsolutePost from "../../shared/AbsolutePost";
+import useGetSavedPosts from "../../../hooks/useGetSavedPosts";
 
 const User = () => {
   const { userId } = useParams();
-  const currUser = useGetCuttentUser();
+  const currUser = useGetCurrentUser();
   const [state, setState] = useState("posts");
-  const userProfile = useGetProfile(userId);
-  const posts = useGetAllUserPosts(userId);
-
+  const [show, setShow] = useState(-1);
+  const data = useGetProfile(userId);
+  const { userProfile, posts } = data;
+  const likedPosts = useGetLikedPosts(userId);
+  const savedPosts = useGetSavedPosts(userId);
   return (
     <div className="p-5 md:p-14 h-screen overflow-y-scroll">
       <div className="flex justify-between items-start">
@@ -34,14 +39,19 @@ const User = () => {
             </h1>
             <div className="flex gap-5 my-5">
               <h1 className="text-xl">
-                <span className="text-blue-600 mr-2">{userProfile?.posts}</span>posts
+                <span className="text-blue-600 mr-2">{userProfile?.posts}</span>
+                posts
               </h1>
               <h1 className="text-xl">
-                <span className="text-blue-600 mr-2">{userProfile?.followers}</span>
+                <span className="text-blue-600 mr-2">
+                  {userProfile?.followers}
+                </span>
                 Followers
               </h1>
               <h1 className="text-xl">
-                <span className="text-blue-600 mr-2">{userProfile?.following}</span>
+                <span className="text-blue-600 mr-2">
+                  {userProfile?.following}
+                </span>
                 Following
               </h1>
             </div>
@@ -55,10 +65,10 @@ const User = () => {
         )}
       </div>
       <div className="py-10">
-        <ul className="flex cursor-pointer">
+        <ul className="grid grid-cols-4 cursor-pointer md:w-2/3">
           <li
             onClick={() => setState("posts")}
-            className={`text-center min-w-28 py-2 text-lg bg-neutral-800 bg-opacity-40 rounded-l-md ${
+            className={`text-center py-2 text-lg bg-neutral-800 bg-opacity-40 rounded-l-md ${
               state === "posts" && " bg-white"
             }`}
           >
@@ -66,7 +76,7 @@ const User = () => {
           </li>
           <li
             onClick={() => setState("liked")}
-            className={`text-center min-w-28 py-2 text-lg bg-neutral-800 bg-opacity-40 ${
+            className={`text-center py-2 text-lg bg-neutral-800 bg-opacity-40 ${
               state === "liked" && " bg-white"
             }`}
           >
@@ -74,14 +84,14 @@ const User = () => {
           </li>
           <li
             onClick={() => setState("saved")}
-            className={`text-center min-w-28 py-2 text-lg bg-neutral-800 bg-opacity-40 ${
+            className={`text-center py-2 text-lg bg-neutral-800 bg-opacity-40 ${
               state === "saved" && " bg-white"
             }`}
           >
             saved
           </li>
           <li
-            className={`text-center min-w-28 py-2 text-lg bg-neutral-800 bg-opacity-40 rounded-r-md ${
+            className={`text-center py-2 text-lg bg-neutral-800 bg-opacity-40 rounded-r-md ${
               state === "" && " bg-white"
             }`}
           >
@@ -91,14 +101,32 @@ const User = () => {
       </div>
       <div className="grid grid-cols-4">
         {state === "posts" &&
-          posts?.map((ele, ind) => <SmallPost key={ind} ele={ele} />)}
-        {state === "liked" && (
-          <h1 className="text-center text-xl">No Liked Posts</h1>
-        )}
-        {state === "saved" && (
-          <h1 className="text-center text-xl">No Saved Posts</h1>
+          posts?.map((ele, ind) => (
+            <div key={ind} onClick={() => setShow(ind)}>
+              <SmallPost ele={ele} /> 
+            </div>
+          ))}
+        {state === "liked" &&
+          likedPosts?.map((ele, ind) => (
+            <div key={ind} onClick={() => setShow(ind)}>
+              <SmallPost ele={ele} />
+            </div>
+          ))}
+        {state === "saved" &&
+          savedPosts?.map((ele, ind) => (
+            <div key={ind} onClick={() => setShow(ind)}>
+              <SmallPost ele={ele} />
+            </div>
+          ))}
+        {state === "tagged" && (
+          <h1 className="text-center text-xl">Under Coding...</h1>
         )}
       </div>
+      <AbsolutePost
+        data={(state == "posts" && posts) || (state == "liked" && likedPosts) || (state=="saved" && savedPosts)}
+        setShow={setShow}
+        show={show}
+      />
     </div>
   );
 };

@@ -1,13 +1,16 @@
-import { useEffect, useState } from "react";
-import { IoSearchOutline } from "react-icons/io5";
-import { IoFilterSharp } from "react-icons/io5";
-import { getAllUsers } from "../../../services/user";
-import Avatar from "react-avatar";
-import useGetAlluUsers from "../../../hooks/useGetAlluUsers";
 import { NavLink } from "react-router-dom";
+import Avatar from "react-avatar";
+import { IoSearchOutline } from "react-icons/io5";
+import useGetAllUsers from "../../../hooks/useGetAllUsers";
+import UserShimmer from "../../shimmers/UserShimmer";
+import { useSelector } from "react-redux";
+import useGetCuttentUser from "../../../hooks/useGetCuttentUser";
+import Follow from "../../shared/Follow";
 
 const Profile = ({ profile }) => {
-  const { name, email, _id } = profile;
+  const { user, following } = profile;
+  const { _id, email, name } = user;
+  const curruser = useGetCuttentUser();
   return (
     <div className="flex flex-col justify-center items-center border border-gray-800 p-4 rounded-lg">
       <NavLink to={"/user/" + _id} className="size-16 m-2">
@@ -15,17 +18,15 @@ const Profile = ({ profile }) => {
       </NavLink>
       <h1 className="">{name}</h1>
       <p className="text-neutral-700">{"@" + email?.split("@")[0]}</p>
-      <button className="px-4 py-1.5 bg-blue-500 rounded-lg my-4">
-        Follow
-      </button>
+      <Follow followingu={following} userId1={curruser?._id} userId2={_id} />
     </div>
   );
 };
 
 const AllPeople = () => {
-  const data = useGetAlluUsers();
+  const data = useGetAllUsers();
   return (
-    <div className="p-10 h-screen overflow-y-scroll">
+    <div className="p-2 md:p-10 h-screen overflow-y-scroll">
       <h1 className="font-semibold text-3xl ">Search People</h1>
       <div className="flex w-full items-center my-4">
         <label className="bg-neutral-800 p-4 rounded-l-lg">
@@ -42,9 +43,11 @@ const AllPeople = () => {
         <h1 className="text-xl font-semibold">People You Might Know</h1>
       </div>
       <div className="my-4 grid grid-cols-2  md:grid-cols-4 gap-2">
-        {data?.map((ele, ind) => (
-          <Profile key={ind} profile={ele} />
-        ))}
+        {data?.loading ? (
+          <UserShimmer />
+        ) : (
+          data?.map((ele, ind) => <Profile key={ind} profile={ele} />)
+        )}
       </div>
     </div>
   );

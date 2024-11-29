@@ -41,7 +41,7 @@ const CreatePost = () => {
   return (
     <div className="h-screen overflow-y-scroll">
       <h1 className="text-3xl font-semibold">Create Post</h1>
-      <form className="felx flex-row gap-4 p-10">
+      <form className="felx flex-row gap-4 p-2 md:p-10">
         <label className="my-4">Caption</label>
         <textarea ref={captionref} rows={4} className="w-full  p-4 focus:outline-none focus:border-[1px] border-blue-500 my-4 rounded-lg bg-neutral-800"/>
         <label className="my-4">Add Photo URL</label>

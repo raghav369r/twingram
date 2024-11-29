@@ -2,13 +2,33 @@ import axios from "axios";
 import {
   DisLikePost_URL,
   Feed_URL,
+  GetLikedPosts_URL,
   GetPost_URL,
   LikePost_URL,
   Post_URL,
   RemoveFromSaved_URL,
   SavePost_URL,
   UserPosts_URL,
+  GetSavedPosts_URL,
 } from "../../utils/endPoints";
+
+export const getSavedPosts = async (userId) => {
+  try {
+    const res = await axios.post(GetSavedPosts_URL, { userId });
+    return res.data;
+  } catch (ex) {
+    return { error: ex, message: "unable to connect to server!!" };
+  }
+};
+
+export const getLikedPosts = async (userId) => {
+  try {
+    const res = await axios.post(GetLikedPosts_URL, { userId });
+    return res.data;
+  } catch (ex) {
+    return { error: ex, message: "unable to connect to server!!" };
+  }
+};
 
 export const getPost = async (postId) => {
   try {
@@ -28,9 +48,9 @@ export const addPost = async (data) => {
   }
 };
 
-export const getFeed = async (data) => {
+export const getFeed = async (userId) => {
   try {
-    const res = await axios.get(Feed_URL);
+    const res = await axios.post(Feed_URL, { userId });
     return res.data;
   } catch (ex) {
     console.log(ex);
@@ -67,7 +87,7 @@ export const disLikePost = async (postId, userId) => {
   }
 };
 
-export const savePost = async (userId, postId) => {
+export const savePost = async (postId, userId) => {
   try {
     const res = await axios.post(SavePost_URL, { userId, postId });
 
@@ -77,7 +97,7 @@ export const savePost = async (userId, postId) => {
   }
 };
 
-export const removeFromSaved = async (userId, postId) => {
+export const removeFromSaved = async (postId, userId) => {
   try {
     const res = await axios.post(RemoveFromSaved_URL, { userId, postId });
 

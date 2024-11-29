@@ -1,5 +1,28 @@
 import axios from "axios";
-import { GetIsLiked_URL, Profile_URL } from "../utils/endPoints";
+import {
+  GetFollow_URL,
+  GetIsLiked_URL,
+  GetUnFollow_URL,
+  Profile_URL,
+} from "../utils/endPoints";
+
+export const followAccount = async (userId1, userId2) => {
+  try {
+    const res = await axios.post(GetFollow_URL, { userId1, userId2 });
+    return res.data;
+  } catch (ex) {
+    return { error: "error", message: "error connecting server!!" };
+  }
+};
+
+export const unFollowAccount = async (userId1, userId2) => {
+  try {
+    const res = await axios.post(GetUnFollow_URL, { userId1, userId2 });
+    return res.data;
+  } catch (ex) {
+    return { error: "error", message: "error connecting server!!" };
+  }
+};
 
 export const getUserProfile = async (id) => {
   try {
@@ -11,9 +34,9 @@ export const getUserProfile = async (id) => {
   }
 };
 
-export const getAllUsers = async () => {
+export const getAllUsers = async (userId) => {
   try {
-    const res = await axios.get(Profile_URL);
+    const res = await axios.post(Profile_URL, { userId });
     return res.data;
   } catch (ex) {
     console.log(ex);

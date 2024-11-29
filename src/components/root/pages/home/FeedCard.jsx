@@ -1,48 +1,29 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { IoIosHeart } from "react-icons/io";
 import Like from "../../../shared/Like";
-import Avatar from "react-avatar";
-import { getUserProfile } from "../../../../services/user";
-import { useNavigate } from "react-router-dom";
-import useGetProfile from "../../../../hooks/useGetProfile";
+import ProfileNTime from "../../../shared/ProfileNTime";
+import Save from "../../../shared/Save";
 
-const FeedCard = ({ post }) => {
+const FeedCard = ({ data }) => {
   const navigate = useNavigate();
   const [doubleTap, setDoubleTap] = useState(false);
-  const [liked, setLiked] = useState(false);
-  const user = useGetProfile(post?.ownerId);
-
-  const handleNavigate = () => {
-    if (user._id) navigate("/user/" + user._id);
-  };
+  const [likedd, setLikedd] = useState(false);
+  const { post, user, liked, saved } = data;
 
   const handleDoubleTap = () => {
-    setLiked(true);
+    setLikedd(true);
     setDoubleTap(true);
     setTimeout(() => {
       setDoubleTap(false);
-    }, 500);
+    }, 1000);
   };
 
   return (
-    <div className="rounded-xl p-8 m-8 border border-gray-700">
-      <div className="flex gap-4 w-full items-center">
-        <div className="size-16">
-          <Avatar
-            name={user?.name}
-            size="100%"
-            round={true}
-            className="cursor-pointer"
-            onClick={handleNavigate}
-          />
-        </div>
-        <div>
-          <h1 className="font-semibold">{user?.name}</h1>
-          <h2 className="text-gray-500">12 hours ago . {post?.location}</h2>
-        </div>
-      </div>
-      <h1 className="my-4">{post?.caption}</h1>
-      <div className="my-2 text-gray-500">
+    <div className="rounded-xl p-4 m-2 md:p-8 md:m-8 border border-gray-700">
+      <ProfileNTime user={user} post={post} />
+      <h1 className="my-2 text-sm md:text-lg">{post?.caption}</h1>
+      <div className="my-2 text-gray-500 text-sm md:text-lg">
         {post?.tags?.map((ele) => "#" + ele)}
       </div>
       <div
@@ -56,18 +37,14 @@ const FeedCard = ({ post }) => {
         />
         {doubleTap && (
           <IoIosHeart
-            style={{ color: "red" }}
-            className="size-40 animate-ping duration-1000 absolute z-10"
+            style={{ color: "white" }}
+            className="size-28 transition delay-150 absolute z-10"
           />
         )}
       </div>
       <div className="mx-2 flex justify-between mt-4">
-        <Like showLikes={true} postele={post} />
-        <img
-          src="./assets/icons/saved.svg"
-          alt=""
-          className="invert transition brightness-0 size-7 cursor-pointer"
-        />
+        <Like showLikes={true} postele={post} liked={liked} />
+        <Save postele={post} savedp={saved} />
       </div>
     </div>
   );

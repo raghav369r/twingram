@@ -3,7 +3,7 @@ import { getAllUserPosts } from "../services/posts/post";
 import { SiNetdata } from "react-icons/si";
 
 const useGetAllUserPosts = (userId) => {
-  const [posts, setPosts] = useState(null);
+  const [posts, setPosts] = useState({loading:true});
   useEffect(() => {
     const getData = async () => {
       const pos = await getAllUserPosts(userId);

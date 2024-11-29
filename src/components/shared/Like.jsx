@@ -1,26 +1,19 @@
 import { useEffect, useState } from "react";
 import { FaRegHeart } from "react-icons/fa";
 import { IoIosHeart } from "react-icons/io";
-import { disLikePost, getPost, likePost } from "../../services/posts/post";
 import { useSelector } from "react-redux";
 import Loading from "./Loading";
+import { disLikePost, likePost } from "../../services/posts/post";
 import { isLiked } from "../../services/user";
 
-const Like = ({ postele, showLikes }) => {
+const Like = ({ postele, showLikes, liked: likedp }) => {
   const [loading, setLoading] = useState(false);
   const [post, setPost] = useState(null);
-  const [liked, setLiked] = useState(false);
+  const [liked, setLiked] = useState(likedp);
   const user = useSelector((store) => store.user);
-
-  const getIsLiked = async (postId, userId) => {
-    if (!userId || !postId) return setLiked(false);
-    const res = await isLiked(postId, userId);
-    if (!res.error) setLiked(res.liked);
-  };
 
   useEffect(() => {
     setPost(postele);
-    getIsLiked(postele?._id, user?._id);
   }, []);
 
   const handleLike = async () => {
@@ -28,9 +21,8 @@ const Like = ({ postele, showLikes }) => {
     var res;
     if (!liked) res = await likePost(post?._id, user?._id);
     else res = await disLikePost(post?._id, user?._id);
-    // setPost(await getPost(post?._id));
     setPost(res?.post);
-    getIsLiked(post?._id, user?._id);
+    setLiked(res?.liked);
     setLoading(false);
   };
 

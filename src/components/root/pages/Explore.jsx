@@ -1,18 +1,20 @@
-import { IoSearchOutline } from "react-icons/io5";
-import { IoFilterSharp } from "react-icons/io5";
-import Like from "../../shared/Like";
-import { useEffect, useState } from "react";
-import { getFeed } from "../../../services/posts/post";
+import { useState } from "react";
 import SmallPost from "./SmallPost";
 import useGetfeed from "../../../hooks/useGetfeed";
+import SmallPostShimmer from "../../shimmers/SmallPostShimmer";
+import { IoSearchOutline } from "react-icons/io5";
+import { IoFilterSharp } from "react-icons/io5";
+import AbsolutePost from "../../shared/AbsolutePost";
 
 const Explore = () => {
-  const data=useGetfeed();
+  const data = useGetfeed();
+  const [show, setShow] = useState(-1);
+
   if (data?.error)
     return <h1 className="font-semibold text-2xl">Some thing went wrong</h1>;
 
   return (
-    <div className="p-10 h-screen overflow-y-scroll">
+    <div className="p-2 md:p-10 h-screen overflow-y-scroll">
       <h1 className="font-semibold text-3xl ">Search Posts</h1>
       <div className="flex w-full items-center my-4">
         <label className="bg-neutral-800 p-4 rounded-l-lg">
@@ -33,12 +35,19 @@ const Explore = () => {
             <IoFilterSharp style={{ color: "#808080" }} className="size-5" />
           </div>
         </div>
-        <div className="grid grid-cols-3">
-          {data?.map((ele, ind) => (
-            <SmallPost ele={ele} key={ind} />
-          ))}
+        <div className="grid grid-cols-3 gap-1">
+          {data?.loading ? (
+            <SmallPostShimmer />
+          ) : (
+            data?.map((ele, ind) => (
+              <div key={ind} onClick={() => setShow(ind)}>
+                <SmallPost ele={ele} />
+              </div>
+            ))
+          )}
         </div>
       </div>
+      <AbsolutePost data={data} show={show} setShow={setShow} />
     </div>
   );
 };
