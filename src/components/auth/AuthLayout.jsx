@@ -8,7 +8,7 @@ const AuthLayout = () => {
   const user = useSelector((store) => store.user);
   const navigate = useNavigate();
   useEffect(() => {
-    if (user) navigate("/");
+    if (user) navigate(-1);
   }, [user, navigate]);
   if(user) return null;
   return (
